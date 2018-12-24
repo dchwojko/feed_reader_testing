@@ -8,7 +8,8 @@ To run the Jasmine tests, simply open index.html in a browser. Jasmine tests wil
 
 ## Referenced websites that helped with this project
 
-https://jasmine.github.io/tutorials/async
+[Jasmine async] (https://jasmine.github.io/tutorials/async)
+[Jasmine Cheatsheet] (https://devhints.io/jasmine)
 
 ## Contributing
 
