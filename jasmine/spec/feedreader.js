@@ -76,26 +76,60 @@ $(function() {
         });
     });
 
-    /* TODO: Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function() {
-        /* TODO: Write a test that ensures when the loadFeed
+        /*
+            https://jasmine.github.io/tutorials/async
+        */
+        beforeEach(function(done) {
+           loadFeed(0,done);
+        });
+
+        /* Test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-        xit('when loadFeed() is called and completes its work, there is at least a single .entry element within the .feed container', function() {
-            expect(true).toBe(false);
+        it('when loadFeed() is called and completes its work, there is at least a single .entry element within the .feed container', function() {
+            const entriesCount = document.querySelectorAll('.entry').length   
+            expect(entriesCount > 0).toBe(true);
         });
+    });
 
-    /* TODO: Write a new test suite named "New Feed Selection" */
-
-        /* TODO: Write a test that ensures when a new feed is loaded
+    describe('New Feed Selection', function() {
+        /* Test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-        xit('ensures when a new feed is loaded by the loadFeed function that the content actually changes', function() {
-            expect(true).toBe(false);
+        let firstTitle, nextTitle
+        let firstFeed, nextFeed
+
+        beforeEach(function (done) {
+            // initialize feed to null
+            $('.feed').empty();
+
+            // load first feed, upon completion load next feed
+            loadFeed(0, function () {
+                // first feed title
+                firstTitle = $('.header-title').text();
+
+                // first feed text
+                firstFeed = $('.feed').text();
+                loadFeed(1, function () {
+                    // next feed title
+                    nextTitle = $('.header-title').text();
+
+                    // next feed text
+                    nextFeed = $('.feed').text();
+                    done();
+                });
+            });
+        });
+
+        it('ensures when a new feed is loaded by the loadFeed function that the content actually changes', function() {
+            expect(firstTitle).not.toBe(nextTitle);
+            expect(firstFeed).not.toBe(nextFeed);
         });
     });
 }());
+
