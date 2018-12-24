@@ -71,8 +71,6 @@ $(function() {
             expect($('body').hasClass('menu-hidden')).toBe(true);
             $('.menu-icon-link').trigger('click');
             expect($('body').hasClass('menu-hidden')).toBe(false);
-            $('.menu-icon-link').trigger('click');
-            expect($('body').hasClass('menu-hidden')).toBe(true);
         });
     });
 
@@ -91,7 +89,7 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
         it('when loadFeed() is called and completes its work, there is at least a single .entry element within the .feed container', function() {
-            const entriesCount = document.querySelectorAll('.entry').length   
+            const entriesCount = document.querySelectorAll('.feed .entry').length   
             expect(entriesCount > 0).toBe(true);
         });
     });
