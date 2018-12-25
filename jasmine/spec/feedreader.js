@@ -72,6 +72,13 @@ $(function() {
             $('.menu-icon-link').trigger('click');
             expect($('body').hasClass('menu-hidden')).toBe(false);
         });
+
+        // make sure we set the state back menu is hidden after each test
+        afterEach(function() {
+            if (!($('body').hasClass('menu-hidden'))) {
+                $('.menu-icon-link').trigger('click');
+            }
+        });
     });
 
     describe('Initial Entries', function() {
@@ -105,7 +112,7 @@ $(function() {
         beforeEach(function (done) {
             // initialize feed to null
             $('.feed').empty();
-
+            
             // load first feed, upon completion load next feed
             loadFeed(0, function () {
                 // first feed title
